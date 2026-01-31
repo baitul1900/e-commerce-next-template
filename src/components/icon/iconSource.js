@@ -1,19 +1,9 @@
-// iconSource.ts
+// iconSource.js
 export const ICON_COMPONENT_SOURCE = `
 import React from "react";
 import * as LucideIcons from "lucide-react";
-import type { LucideIcon } from "lucide-react";
 
-interface IconProps {
-  name: keyof typeof LucideIcons;
-  size?: number;
-  color?: string;
-  strokeWidth?: number;
-  className?: string;
-  ariaLabel?: string;
-}
-
-const Icon: React.FC<IconProps> = ({
+const Icon = ({
   name,
   size = 24,
   color = "currentColor",
@@ -21,7 +11,7 @@ const Icon: React.FC<IconProps> = ({
   className = "",
   ariaLabel,
 }) => {
-  const LucideIcon = LucideIcons[name] as LucideIcon | undefined;
+  const LucideIcon = LucideIcons[name];
 
   if (!LucideIcon) {
     console.warn(\`Icon "\${name}" does not exist\`);

@@ -1,21 +1,7 @@
-
 import React from 'react';
 import * as LucideIcons from "lucide-react";
-import type { LucideIcon } from "lucide-react";
 
-
-interface IconProps {
-    name: keyof typeof LucideIcons; // icon name like "Play", "User"
-    size?: number;
-    color?: string;
-    strokeWidth?: number;
-    className?: string;
-    ariaLabel?: string; 
-}
-
-
-
-const Icon: React.FC<IconProps> = (
+const Icon = (
     {
         name,
         size = 24,
@@ -26,7 +12,7 @@ const Icon: React.FC<IconProps> = (
     }
 ) => {
 
-    const LucideIcon = LucideIcons[name] as LucideIcon | undefined;
+    const LucideIcon = LucideIcons[name];
     if (!LucideIcon) {
         console.warn(`Icon "${name}" does not exist in lucide-react library.`);
         return null;
