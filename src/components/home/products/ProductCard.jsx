@@ -9,14 +9,14 @@ import { useToast } from '@/context/ToastContext';
 const styles = {
     card: "group relative bg-white dark:bg-forest/20 rounded-2xl overflow-hidden border border-forest/5 dark:border-cream/5 transition-all duration-500 hover:shadow-2xl hover:-translate-y-1",
     imageContainer: {
-        wrapper: "relative aspect-[4/5] overflow-hidden bg-cream/30 dark:bg-forest/40",
+        wrapper: "relative aspect-[4/4] overflow-hidden bg-cream/30 dark:bg-forest/40",
         image: "w-full h-full object-cover transition-transform duration-700 group-hover:scale-110",
         overlay: "absolute inset-0 bg-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500",
         badge: "absolute top-4 left-4 z-10 px-3 py-1 bg-primary text-white text-[10px] font-bold uppercase tracking-widest rounded-full shadow-lg",
         actions: "absolute top-4 right-4 z-10 flex flex-col gap-2 translate-x-12 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-500"
     },
     content: {
-        wrapper: "p-5",
+        wrapper: "p-3",
         category: "text-xs font-medium text-primary uppercase tracking-wider mb-2 block",
         title: "text-base font-bold text-forest dark:text-cream leading-tight mb-3 line-clamp-1 group-hover:text-primary transition-colors",
         rating: {

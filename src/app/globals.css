@@ -9,7 +9,7 @@
   /* Base colors */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  
+
   /* Custom colors */
   --color-primary: #0fbd3b;
   --color-forest: #0d1b11;
@@ -17,17 +17,24 @@
   --color-cream-dark: #edf4ef;
   --color-background-light: #f6f8f6;
   --color-background-dark: #102215;
-  
+
   /* Fonts */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-display: Manrope, sans-serif;
-  
+
   /* Border radius */
   --radius: 0.25rem;
   --radius-lg: 0.5rem;
   --radius-xl: 0.75rem;
   --radius-full: 9999px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #102215;
+    --foreground: #ededed;
+  }
 }
 
 body {

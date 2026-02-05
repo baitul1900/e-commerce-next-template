@@ -12,7 +12,7 @@ const styles = {
         title: "text-3xl md:text-4xl lg:text-5xl font-bold font-display text-forest dark:text-cream mb-4",
         description: "text-forest/60 dark:text-cream/60 max-w-2xl mx-auto"
     },
-    grid: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 md:gap-10"
+    grid: "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-8"
 };
 
 export default function PopularProducts() {
