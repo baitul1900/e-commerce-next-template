@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Search, ShoppingCart, User, Menu, X, Leaf } from 'lucide-react';
 import SectionWrapper from './SectionWrapper';
+import Button from '../ui/Button';
 
 export default function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -78,27 +79,35 @@ export default function Navbar() {
                             </div>
 
                             <div className="flex items-center gap-3">
-                                <button className="hidden sm:flex p-2 rounded-lg bg-forest/5 dark:bg-cream/5 hover:bg-primary/20 hover:text-primary transition-all relative group">
+                                <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    className="hidden sm:flex relative group"
+                                >
                                     <ShoppingCart className="w-5 h-5 text-forest dark:text-cream group-hover:text-primary transition-colors" />
                                     <span className="absolute -top-1 -right-1 bg-primary text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
-                                </button>
+                                </Button>
 
                                 {isLoggedIn ? (
-                                    <button className="hidden sm:flex p-2 rounded-lg bg-forest/5 dark:bg-cream/5 hover:bg-primary/20 hover:text-primary transition-all group">
+                                    <Button variant="ghost" size="icon" className="hidden sm:flex group">
                                         <User className="w-5 h-5 text-forest dark:text-cream group-hover:text-primary transition-colors" />
-                                    </button>
+                                    </Button>
                                 ) : (
-                                    <button
+                                    <Button
                                         onClick={() => setIsLoggedIn(true)}
-                                        className="hidden sm:flex px-4 py-2 rounded-lg bg-primary text-white text-sm font-bold hover:bg-primary/90 transition-all"
+                                        className="hidden sm:flex px-4 py-2"
+                                        size="sm"
+                                        variant="primary"
                                     >
                                         Join Now
-                                    </button>
+                                    </Button>
                                 )}
 
                                 {/* Mobile Menu Button */}
-                                <button
-                                    className="lg:hidden p-2 rounded-lg hover:bg-forest/5 dark:hover:bg-cream/5 transition-colors"
+                                <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    className="lg:hidden"
                                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                                 >
                                     {isMobileMenuOpen ? (
@@ -106,7 +115,7 @@ export default function Navbar() {
                                     ) : (
                                         <Menu className="w-6 h-6 text-forest dark:text-cream" />
                                     )}
-                                </button>
+                                </Button>
                             </div>
                         </div>
                     </div>
@@ -146,25 +155,23 @@ export default function Navbar() {
                             </Link>
                         </nav>
                         <div className="flex gap-4 pt-4 mt-4 border-t border-forest/10 dark:border-cream/10">
-                            <button className="flex-1 flex items-center justify-center gap-2 p-3 rounded-lg bg-forest/5 dark:bg-cream/5 hover:bg-primary/20 hover:text-primary transition-all">
-                                <ShoppingCart className="w-5 h-5" />
-                                <span className="font-semibold">Cart (0)</span>
-                            </button>
+                            <Button variant="ghost" className="flex-1" leftIcon={ShoppingCart}>
+                                Cart (0)
+                            </Button>
                             {isLoggedIn ? (
-                                <button className="flex-1 flex items-center justify-center gap-2 p-3 rounded-lg bg-forest/5 dark:bg-cream/5 hover:bg-primary/20 hover:text-primary transition-all">
-                                    <User className="w-5 h-5" />
-                                    <span className="font-semibold">Profile</span>
-                                </button>
+                                <Button variant="ghost" className="flex-1" leftIcon={User}>
+                                    Profile
+                                </Button>
                             ) : (
-                                <button
+                                <Button
                                     onClick={() => {
                                         setIsLoggedIn(true);
                                         setIsMobileMenuOpen(false);
                                     }}
-                                    className="flex-1 flex items-center justify-center gap-2 p-3 rounded-lg bg-primary text-white font-bold hover:bg-primary/90 transition-all"
+                                    className="flex-1"
                                 >
                                     Join Now
-                                </button>
+                                </Button>
                             )}
                         </div>
                     </div>
