@@ -1,14 +1,13 @@
 import Hero from "@/components/home/Hero";
+import CategorySlider from "@/components/home/products/CategorySlider";
+import PopularProducts from "@/components/home/products/PopularProducts";
 
 export default function Home() {
   return (
-    <div>
+    <>
       <Hero />
-      <div className="py-12 flex flex-col items-center justify-center text-center">
-        <h2 className="text-2xl font-bold text-forest/20 dark:text-cream/20 uppercase tracking-widest">
-          More content coming soon
-        </h2>
-      </div>
-    </div>
+      <CategorySlider />
+      <PopularProducts />
+    </>
   );
 }
