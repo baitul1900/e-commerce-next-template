@@ -35,14 +35,17 @@ const styles = {
     }
 };
 
+import { useCart } from '@/context/CartContext';
+// ... other imports
+
 export default function ProductCard({ product }) {
+    const { addToCart } = useCart();
     const { showToast } = useToast();
 
     const handleAddToCart = (e) => {
         e.preventDefault();
         e.stopPropagation();
-        // showToast(`${product.name} added to cart!`, 'success', 'top-center');
-        console.log('Add to cart:', product.name);
+        addToCart(product);
     };
 
     const handleWishlist = (e) => {

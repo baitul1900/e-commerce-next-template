@@ -5,8 +5,10 @@ import Link from 'next/link';
 import { Search, ShoppingCart, User, Menu, X, Leaf } from 'lucide-react';
 import SectionWrapper from './SectionWrapper';
 import Button from '../ui/Button';
+import { useCart } from '@/context/CartContext';
 
 export default function Navbar() {
+    const { cartCount, setIsCartOpen } = useCart();
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -79,14 +81,20 @@ export default function Navbar() {
                             </div>
 
                             <div className="flex items-center gap-3">
-                                <Button
-                                    variant="ghost"
-                                    size="icon"
-                                    className="hidden sm:flex relative group"
-                                >
-                                    <ShoppingCart className="w-5 h-5 text-forest dark:text-cream group-hover:text-primary transition-colors" />
-                                    <span className="absolute -top-1 -right-1 bg-primary text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
-                                </Button>
+                                <Link href="/cart">
+                                    <Button
+                                        variant="ghost"
+                                        size="icon"
+                                        className="hidden sm:flex relative group"
+                                    >
+                                        <ShoppingCart className="w-5 h-5 text-forest dark:text-cream group-hover:text-primary transition-colors" />
+                                        {cartCount > 0 && (
+                                            <span className="absolute -top-1 -right-1 bg-primary text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                                                {cartCount}
+                                            </span>
+                                        )}
+                                    </Button>
+                                </Link>
 
                                 {isLoggedIn ? (
                                     <Button variant="ghost" size="icon" className="hidden sm:flex group">

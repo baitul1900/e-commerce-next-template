@@ -4,14 +4,27 @@ import React, { useState } from 'react';
 import { Star, ShoppingCart, Heart, Share2, ShieldCheck, Truck, RefreshCw } from 'lucide-react';
 import Button from '../ui/Button';
 
+import { useCart } from '@/context/CartContext';
+
 const ProductInfo = ({ product }) => {
     const [quantity, setQuantity] = useState(1);
+    const { addToCart } = useCart();
 
     if (!product) return null;
 
+    const handleAddToCart = () => {
+        const cartItem = {
+            ...product,
+            id: Number(product.id), // Normalize ID to number to match PRODUCTS constant
+            name: product.title,    // Map title to name
+            image: product.images[0] // Map first image to image property
+        };
+        addToCart(cartItem, quantity);
+    };
+
     return (
         <div className="flex flex-col gap-6">
-            {/* Header */}
+            {/* ... existing header code ... */}
             <div>
                 <div className="flex items-center gap-2 mb-2">
                     <span className="px-3 py-1 text-xs font-bold text-primary bg-primary/10 rounded-full">
@@ -82,7 +95,11 @@ const ProductInfo = ({ product }) => {
                     </button>
                 </div>
 
-                <Button className="flex-1" leftIcon={ShoppingCart}>
+                <Button
+                    className="flex-1"
+                    leftIcon={ShoppingCart}
+                    onClick={handleAddToCart}
+                >
                     Add to Cart
                 </Button>
 
