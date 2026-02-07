@@ -5,7 +5,7 @@ export const SLIDE_DATA = [
         subtitle: "Sustainable Essentials",
         description: "Discover our curated collection of ethically sourced products designed for a greener tomorrow.",
         ctaText: "Shop Collection",
-        ctaLink: "/shop",
+        ctaLink: "/products",
         image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=2813&auto=format&fit=crop"
     },
     {
