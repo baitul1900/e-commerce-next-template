@@ -3,8 +3,10 @@
 import React, { useEffect, useState } from 'react';
 import SectionWrapper from '@/components/layout/SectionWrapper';
 import ProductGallery from '@/components/products/ProductGallery';
-import ProductInfo from '@/components/products/ProductInfo';
+import RelatedProducts from '@/components/products/RelatedProducts';
 import { useParams } from 'next/navigation';
+import ProductInfo from '@/components/products/ProductInfo';
+import ProductDetailsTabs from '@/components/products/ProductDetailsTabs';
 
 // Dummy Data
 const DUMMY_PRODUCTS = {
@@ -15,7 +17,7 @@ const DUMMY_PRODUCTS = {
         originalPrice: 349.99,
         rating: 4.8,
         reviews: 124,
-        description: 'Experience high-fidelity audio with our premium wireless headphones. Featuring active noise cancellation, 30-hour battery life, and ultra-comfortable ear cushions for long listening sessions.',
+        description: 'Experience high-fidelity audio with our premium wireless headphones. Featuring active noise cancellation, 30-hour battery life, and ultra-comfortable ear cushions for long listening sessions. These headphones are engineered to deliver deep, immersive sound and crystal-clear calls, making them perfect for commuters, travelers, and audiophiles alike.',
         category: 'Electronics',
         inStock: true,
         images: [
@@ -31,7 +33,7 @@ const DUMMY_PRODUCTS = {
         price: 199.99,
         rating: 4.5,
         reviews: 89,
-        description: 'Work in comfort with our ergonomic office chair. Designed with lumbar support, adjustable height, and breathable mesh material to keep you cool and productive throughout the day.',
+        description: 'Work in comfort with our ergonomic office chair. Designed with lumbar support, adjustable height, and breathable mesh material to keep you cool and productive throughout the day. The sturdy base and smooth-rolling casters ensure stability and ease of movement.',
         category: 'Furniture',
         inStock: true,
         images: [
@@ -85,6 +87,12 @@ const ProductDetailsPage = () => {
                 {/* Right Column - Product Info */}
                 <ProductInfo product={product} />
             </div>
+
+            {/* Bottom Section - Tabs */}
+            <ProductDetailsTabs product={product} />
+
+            {/* Related Products */}
+            <RelatedProducts currentProductId={product.id} />
         </SectionWrapper>
     );
 };
