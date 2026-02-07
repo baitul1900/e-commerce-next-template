@@ -5,8 +5,11 @@ import SectionWrapper from '@/components/layout/SectionWrapper';
 import ProductCard from '@/components/home/products/ProductCard';
 import ProductFilters from '@/components/products/ProductFilters';
 import ProductSort from '@/components/products/ProductSort';
+import Pagination from '@/components/ui/Pagination';
 import { PRODUCTS } from '@/constants/productData';
 import { Filter, X } from 'lucide-react';
+
+const ITEMS_PER_PAGE = 9;
 
 const styles = {
     wrapper: "py-8 lg:py-16 min-h-screen",
@@ -30,6 +33,7 @@ export default function ShopPage() {
     const [selectedCategory, setSelectedCategory] = useState('All');
     const [priceRange, setPriceRange] = useState([0, 1000]);
     const [sortBy, setSortBy] = useState('featured');
+    const [currentPage, setCurrentPage] = useState(1);
 
     // Extract unique categories from products
     const categories = useMemo(() => {
@@ -50,6 +54,12 @@ export default function ShopPage() {
     useEffect(() => {
         setPriceRange([0, maxPrice + 50]); // Add buffer
     }, [maxPrice]);
+
+    // Reset page when filters change
+    useEffect(() => {
+        setCurrentPage(1);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, [selectedCategory, priceRange, sortBy]);
 
 
     // Filter and Sort Logic
@@ -88,6 +98,18 @@ export default function ShopPage() {
 
         return result;
     }, [selectedCategory, priceRange, sortBy]);
+
+    // Pagination Logic
+    const totalPages = Math.ceil(filteredProducts.length / ITEMS_PER_PAGE);
+    const paginatedProducts = filteredProducts.slice(
+        (currentPage - 1) * ITEMS_PER_PAGE,
+        currentPage * ITEMS_PER_PAGE
+    );
+
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
 
     const handleClearFilters = () => {
         setSelectedCategory('All');
@@ -160,12 +182,20 @@ export default function ShopPage() {
                         onMobileFilterClick={() => setIsMobileFiltersOpen(true)}
                     />
 
-                    {filteredProducts.length > 0 ? (
-                        <div className={styles.grid}>
-                            {filteredProducts.map((product) => (
-                                <ProductCard key={product.id} product={product} />
-                            ))}
-                        </div>
+                    {paginatedProducts.length > 0 ? (
+                        <>
+                            <div className={styles.grid}>
+                                {paginatedProducts.map((product) => (
+                                    <ProductCard key={product.id} product={product} />
+                                ))}
+                            </div>
+
+                            <Pagination
+                                currentPage={currentPage}
+                                totalPages={totalPages}
+                                onPageChange={handlePageChange}
+                            />
+                        </>
                     ) : (
                         <div className="text-center py-24 bg-forest/5 dark:bg-cream/5 rounded-2xl">
                             <h3 className="text-xl font-bold text-forest dark:text-cream mb-2">No products found</h3>
