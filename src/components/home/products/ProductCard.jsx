@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { Star, Heart } from 'lucide-react';
 import Button from '../../ui/Button';
 import Icon from '@/components/icon/Icon';
@@ -40,12 +41,21 @@ export default function ProductCard({ product }) {
     const handleAddToCart = (e) => {
         e.preventDefault();
         e.stopPropagation();
-        showToast(`${product.name} added to cart!`, 'success', 'top-center');
+        // showToast(`${product.name} added to cart!`, 'success', 'top-center');
         console.log('Add to cart:', product.name);
     };
 
+    const handleWishlist = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('Add to wishlist:', product.name);
+    }
+
     return (
-        <div className={styles.card}>
+        <Link
+            href={`/products/${product.id}`}
+            className={styles.card}
+        >
             {/* Image Section */}
             <div className={styles.imageContainer.wrapper}>
                 {product.badge && (
@@ -55,7 +65,12 @@ export default function ProductCard({ product }) {
                 )}
 
                 <div className={styles.imageContainer.actions}>
-                    <Button variant="ghost" size="icon" className="bg-white/80 dark:bg-forest/80 backdrop-blur-md w-8 h-8">
+                    <Button
+                        variant="ghost"
+                        size="icon"
+                        className="bg-white/80 dark:bg-forest/80 backdrop-blur-md w-8 h-8"
+                        onClick={handleWishlist}
+                    >
                         <Heart className="w-4 h-4 text-forest dark:text-cream" />
                     </Button>
                 </div>
@@ -105,6 +120,6 @@ export default function ProductCard({ product }) {
                     </Button>
                 </div>
             </div>
-        </div>
+        </Link>
     );
 }
