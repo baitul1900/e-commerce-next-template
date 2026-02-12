@@ -5,10 +5,14 @@ import { Star, ShoppingCart, Heart, Share2, ShieldCheck, Truck, RefreshCw } from
 import Button from '../ui/Button';
 
 import { useCart } from '@/context/CartContext';
+import { useWishlist } from '@/context/WishlistContext';
 
 const ProductInfo = ({ product }) => {
     const [quantity, setQuantity] = useState(1);
     const { addToCart } = useCart();
+    const { toggleWishlist, isInWishlist } = useWishlist();
+
+    const isWishlisted = product ? isInWishlist(product.id) : false;
 
     if (!product) return null;
 
@@ -21,6 +25,16 @@ const ProductInfo = ({ product }) => {
         };
         addToCart(cartItem, quantity);
     };
+
+    const handleWishlist = () => {
+        const wishlistItem = {
+            ...product,
+            id: Number(product.id),
+            name: product.title,
+            image: product.images[0]
+        }
+        toggleWishlist(wishlistItem);
+    }
 
     return (
         <div className="flex flex-col gap-6">
@@ -103,8 +117,13 @@ const ProductInfo = ({ product }) => {
                     Add to Cart
                 </Button>
 
-                <Button variant="outline" size="icon" className="shrink-0">
-                    <Heart className="w-5 h-5" />
+                <Button
+                    variant="outline"
+                    size="icon"
+                    className="shrink-0 group"
+                    onClick={handleWishlist}
+                >
+                    <Heart className={`w-5 h-5 ${isWishlisted ? 'fill-red-500 text-red-500' : 'group-hover:text-red-500 transition-colors'}`} />
                 </Button>
             </div>
 

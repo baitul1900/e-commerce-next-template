@@ -36,11 +36,15 @@ const styles = {
 };
 
 import { useCart } from '@/context/CartContext';
+import { useWishlist } from '@/context/WishlistContext';
 // ... other imports
 
 export default function ProductCard({ product }) {
     const { addToCart } = useCart();
+    const { toggleWishlist, isInWishlist } = useWishlist();
     const { showToast } = useToast();
+
+    const isWishlisted = isInWishlist(product.id);
 
     const handleAddToCart = (e) => {
         e.preventDefault();
@@ -51,7 +55,7 @@ export default function ProductCard({ product }) {
     const handleWishlist = (e) => {
         e.preventDefault();
         e.stopPropagation();
-        console.log('Add to wishlist:', product.name);
+        toggleWishlist(product);
     }
 
     return (
@@ -74,7 +78,7 @@ export default function ProductCard({ product }) {
                         className="bg-white/80 dark:bg-forest/80 backdrop-blur-md w-8 h-8"
                         onClick={handleWishlist}
                     >
-                        <Heart className="w-4 h-4 text-forest dark:text-cream" />
+                        <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-red-500 text-red-500' : 'text-forest dark:text-cream'}`} />
                     </Button>
                 </div>
 

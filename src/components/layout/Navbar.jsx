@@ -2,13 +2,15 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Search, ShoppingCart, User, Menu, X, Leaf } from 'lucide-react';
+import { Search, ShoppingCart, User, Menu, X, Leaf, Heart } from 'lucide-react';
 import SectionWrapper from './SectionWrapper';
 import Button from '../ui/Button';
 import { useCart } from '@/context/CartContext';
+import { useWishlist } from '@/context/WishlistContext';
 
 export default function Navbar() {
     const { cartCount, setIsCartOpen } = useCart();
+    const { wishlistCount } = useWishlist();
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -81,6 +83,21 @@ export default function Navbar() {
                             </div>
 
                             <div className="flex items-center gap-3">
+                                <Link href="/wishlist">
+                                    <Button
+                                        variant="ghost"
+                                        size="icon"
+                                        className="hidden sm:flex relative group"
+                                    >
+                                        <Heart className="w-5 h-5 text-forest dark:text-cream group-hover:text-red-500 transition-colors" />
+                                        {wishlistCount > 0 && (
+                                            <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                                                {wishlistCount}
+                                            </span>
+                                        )}
+                                    </Button>
+                                </Link>
+
                                 <Link href="/cart">
                                     <Button
                                         variant="ghost"
@@ -163,9 +180,16 @@ export default function Navbar() {
                             </Link>
                         </nav>
                         <div className="flex gap-4 pt-4 mt-4 border-t border-forest/10 dark:border-cream/10">
-                            <Button variant="ghost" className="flex-1" leftIcon={ShoppingCart}>
-                                Cart (0)
-                            </Button>
+                            <Link href="/wishlist" className="flex-1">
+                                <Button variant="ghost" className="w-full" leftIcon={Heart}>
+                                    Wishlist ({wishlistCount})
+                                </Button>
+                            </Link>
+                            <Link href="/cart" className="flex-1">
+                                <Button variant="ghost" className="w-full" leftIcon={ShoppingCart}>
+                                    Cart ({cartCount})
+                                </Button>
+                            </Link>
                             {isLoggedIn ? (
                                 <Button variant="ghost" className="flex-1" leftIcon={User}>
                                     Profile
@@ -184,7 +208,7 @@ export default function Navbar() {
                         </div>
                     </div>
                 </div>
-            </header>
+            </header >
         </>
     );
 }
