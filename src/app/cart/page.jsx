@@ -143,12 +143,14 @@ export default function CartPage() {
                                 <span className={styles.summary.totalValue}>${finalTotal.toFixed(2)}</span>
                             </div>
 
-                            <Button
-                                variant="primary"
-                                className={styles.summary.checkoutBtn}
-                            >
-                                Proceed to Checkout
-                            </Button>
+                            <Link href="/checkout" className="block w-full">
+                                <Button
+                                    variant="primary"
+                                    className={styles.summary.checkoutBtn}
+                                >
+                                    Proceed to Checkout
+                                </Button>
+                            </Link>
 
                             <div className="mt-6 text-center">
                                 <Link href="/products" className="text-sm text-forest/60 dark:text-cream/60 hover:text-primary transition-colors flex items-center justify-center gap-2">

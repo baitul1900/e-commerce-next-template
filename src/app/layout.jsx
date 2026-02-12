@@ -6,6 +6,7 @@ import { ToastProvider } from "@/context/ToastContext";
 import Footer from "@/components/layout/Footer";
 import { CartProvider } from "@/context/CartContext";
 import { WishlistProvider } from "@/context/WishlistContext";
+import { CheckoutProvider } from "@/context/CheckoutContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,13 +34,15 @@ export default function RootLayout({
         <ToastProvider>
           <CartProvider>
             <WishlistProvider>
-              <Topbar />
-              <Navbar />
+              <CheckoutProvider>
+                <Topbar />
+                <Navbar />
 
-              <main className="">
-                {children}
-              </main>
-              <Footer />
+                <main className="">
+                  {children}
+                </main>
+                <Footer />
+              </CheckoutProvider>
             </WishlistProvider>
           </CartProvider>
         </ToastProvider>
